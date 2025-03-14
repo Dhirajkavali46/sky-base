@@ -292,4 +292,50 @@
             if (selectedOption === correctAnswer) {
                 feedback.textContent = "Correct! Well done!";
                 feedback.className = 'quiz-feedback correct';  // Apply correct animation
-           
+            } else {
+                feedback.textContent = "Incorrect. Try again!";
+                feedback.className = 'quiz-feedback incorrect';  // Apply incorrect animation
+            }
+
+            // Show the feedback and animate it
+            feedback.style.opacity = 1;
+
+            // Move to the next question
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                setTimeout(() => {
+                    loadQuestion(currentQuestionIndex);
+                    feedback.textContent = '';
+                    feedback.style.opacity = 0;
+                }, 2000);
+            } else {
+                setTimeout(() => {
+                    feedback.textContent = "You've completed the quiz!";
+                }, 2000);
+            }
+        }
+
+        // Generate Random Word
+        function generateRandomWord() {
+            const words = [
+                { spanish: "Gato", english: "Cat" },
+                { spanish: "Perro", english: "Dog" },
+                { spanish: "Coche", english: "Car" },
+                { spanish: "Libro", english: "Book" },
+                { spanish: "Zapato", english: "Shoe" }
+            ];
+
+            const randomWord = words[Math.floor(Math.random() * words.length)];
+            const randomWordDiv = document.getElementById("randomWord");
+            randomWordDiv.textContent = `Random Word: ${randomWord.spanish} means ${randomWord.english}`;
+            randomWordDiv.style.display = 'block';
+        }
+
+        // Show Spanish Facts
+        function showSpanishFacts() {
+            const factsSection = document.getElementById("factsSection");
+            factsSection.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
